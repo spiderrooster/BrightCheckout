@@ -20,14 +20,10 @@ public class Catalogue
         this.catalogue.Add(prod);
     }
 
-    public void AddUpdateProductPrice(string sku, int price)
+    public void AddUpdateProductPrice(string sku, decimal price)
     {
-        Product prod = new Product(sku, price);
-        if (!catalogue.Contains(prod))
-        {
-            this.catalogue.RemoveAll(x => x.Sku == prod.Sku);
-        }
-        this.catalogue.Add(prod);
+        this.catalogue.RemoveAll(x => x.Sku == sku);
+        this.catalogue.Add(new Product(sku, price));
     }
 
     public void RemoveProduct(string sku)
