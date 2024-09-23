@@ -4,14 +4,14 @@ public class ApplyOffers
 {
     private List<Offer> offers = new List<Offer>();
 
-    public List<Offer> UpdateAddOffer(string sku, int quantity, decimal discountPrice)
+    public List<Offer> UpdateAddOffer(string sku, int quantity, double discountPrice)
     {
         this.offers.RemoveAll(x => x.Sku == sku);
         this.offers.Add(new Offer(sku, quantity, discountPrice));
         return offers;
     }
 
-    public decimal ApplyOffersToProducts(string sku, int basketQuantity)
+    public double ApplyOffersToProducts(string sku, int basketQuantity)
     {
         var offer = this.offers.Where(x => x.Sku == sku).FirstOrDefault();
         if (offer == null)
