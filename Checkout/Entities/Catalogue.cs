@@ -1,4 +1,6 @@
-﻿namespace Checkout.Entities;
+﻿using Checkout.Exeptions;
+
+namespace Checkout.Entities;
 
 public class Catalogue
 {
@@ -7,11 +9,6 @@ public class Catalogue
     public List<Product> GetCatalogue()
     {
         return catalogue;
-    }
- 
-    public Product CreateProduct(string sku, int price)
-    {
-        return new Product(sku, price);
     }
 
     public void AddUpdateProductPrice(Product prod)
@@ -36,5 +33,18 @@ public class Catalogue
     public void RemoveProduct(string sku)
     {
         this.catalogue.RemoveAll(x => x.Sku == sku);
+    }
+
+    public decimal GetPriceForProduct(string sku)
+    {
+        var product = this.catalogue.Where(x => x.Sku == sku).FirstOrDefault();
+        if (product == null)
+        {
+            throw new UnknownProductException(sku);
+        }
+        else
+        {
+            return product.Price;
+        }
     }
 }
