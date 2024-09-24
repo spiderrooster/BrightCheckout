@@ -1,5 +1,5 @@
 namespace Checkout.Entities;
 
-public class Basket:Dictionary<string, decimal>
+public class Basket:Dictionary<string, int>
 {
 }

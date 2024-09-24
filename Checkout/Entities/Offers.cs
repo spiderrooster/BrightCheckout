@@ -4,10 +4,20 @@ public class Offers
 {
     private List<Offer> offers = new List<Offer>();
 
-    public List<Offer> UpdateAdd(string sku, int quantity, double discountPrice)
+    public void UpdateAdd(string sku, int quantity, double discountPrice)
     {
         this.offers.RemoveAll(x => x.Sku == sku);
         this.offers.Add(new Offer(sku, quantity, discountPrice));
+    }
+
+    public void UpdateAdd(Offer offer)
+    {
+        this.offers.RemoveAll(x => x.Sku == offer.Sku);
+        this.offers.Add(offer);
+    }
+
+    public List<Offer> GetOffers()
+    {
         return offers;
     }
 
@@ -20,7 +30,7 @@ public class Offers
         }
         else
         {
-            return basketQuantity / offer.Quantity * offer.DiscountPrice;
+            return (basketQuantity % offer.Quantity) * offer.DiscountPrice;
         }
     }
 }

@@ -16,6 +16,5 @@ public class ProductTest
     {
         Assert.AreEqual(product.Sku, "B");
         Assert.AreEqual(product.Price, 15.00);
-        Console.WriteLine("Hello, World!, ProductTestOne");
     }
 }

@@ -4,42 +4,51 @@ namespace Checkout.Process;
 
 public class CalculateBasket
 {
-
     private Catalogue catalogue;
     private Offers offers;
     private Basket basket;
-    public CalculateBasket(Catalogue catalogue, Offers offers, Basket basket)
+    public CalculateBasket(Catalogue catalogue, Offers offers)
     {
         this.catalogue = catalogue;
         this.offers = offers;
-        this.basket = basket;
+        this.basket = new Basket();
     }
 
-       public void Scan(string sku, int times)
-        {
-            if (basket.ContainsKey(sku))
-            {
-                basket[sku] += times;
-            }
-            else
-            {
-                basket.Add(sku, times);
-            }
-        }
+    public Basket GetBasket()
+    {
+        return basket;
+    }
 
-        public double Total
+    public void ScanList(List<String> items)
+    {
+        foreach (String sku in items)
         {
-            get
-            {
-                var total = 0;
-                foreach (var group in basket)
-                {
-                    var sku = group.Key;
-                    var number_of_items = group.Value;
-                    total += offers.ApplyOffer(sku, number_of_items);
-                    total += number_of_items * catalogue.GetPrice(group.Key);
-                }
-                return total;
-            }
+            this.Scan(sku);
         }
+    }
+
+    public void Scan(string sku)
+    {
+        if (basket.ContainsKey(sku))
+        {
+            basket[sku] += 1;
+        }
+        else
+        {
+            basket.Add(sku, 1);
+        }
+    }
+
+    public double Total()
+    {
+        double total = 0;
+        foreach (var group in basket)
+        {
+            var sku = group.Key;
+            var baskQuantity = group.Value;
+            total += offers.ApplyOffer(sku, baskQuantity);
+            total += baskQuantity * catalogue.GetPrice(group.Key);
+        }
+        return total;
+    }
 }

@@ -17,6 +17,5 @@ public class OfferTest
         Assert.AreEqual(offer.Sku, "A");
         Assert.AreEqual(offer.Quantity, 10);
         Assert.AreEqual(offer.DiscountPrice, 10.00);
-        Console.WriteLine("Hello, World!, OfferTestOne");
     }
 }
