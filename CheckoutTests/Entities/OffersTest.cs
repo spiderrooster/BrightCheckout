@@ -41,6 +41,13 @@ public class OffersTest
     }
 
     [TestMethod]
+    public void RemoveFromCatalogue()
+    {
+        this.offers = new Offers();
+        Assert.ThrowsException<NoOffersFoundException>(() => this.offers.GetOffers());
+    }
+
+    [TestMethod]
     public void TestOffer()
     {
         Assert.AreEqual(offers.GetOffers().First(x => x.Sku == A.Sku).Sku, A.Sku);
@@ -49,12 +56,5 @@ public class OffersTest
         Assert.AreEqual(offers.GetOffers().First(x => x.Sku == B.Sku).Sku, B.Sku);
         Assert.AreEqual(offers.GetOffers().First(x => x.Sku == B.Sku).Quantity, B.Quantity);
         Assert.AreEqual(offers.GetOffers().First(x => x.Sku == B.Sku).DiscountPrice, B.DiscountPrice);
-    }
-
-
-    [TestMethod]
-    public void RemoveFromCatalogue()
-    {
-        Assert.ThrowsException<NoOffersFoundException>(() => offers.GetOffers());
     }
 }

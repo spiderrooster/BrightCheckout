@@ -45,7 +45,7 @@ public class CalculateBasketTest
             { "A", "A", "A" };
         calculateBasket.ScanList(items);
 
-        Assert.AreEqual(calculateBasket.GetBasket().Count(), 2);
+        Assert.AreEqual(calculateBasket.GetBasket().Count(), 1);
         Assert.AreEqual(calculateBasket.GetBasket().Where(x => x.Key == "A").SingleOrDefault().Value, 3);
     }
 
@@ -56,7 +56,7 @@ public class CalculateBasketTest
             { "D", "D", "D" };
         calculateBasket.ScanList(items);
 
-        Assert.AreEqual(calculateBasket.GetBasket().Count(), 3);
+        Assert.AreEqual(calculateBasket.GetBasket().Count(), 1);
         Assert.AreEqual(calculateBasket.GetBasket().Where(x => x.Key == "D").SingleOrDefault().Value, 3);
         Assert.AreEqual(calculateBasket.Total(), 45.00);
     }
