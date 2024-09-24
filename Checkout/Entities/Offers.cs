@@ -1,17 +1,17 @@
 namespace Checkout.Entities;
 
-public class ApplyOffers
+public class Offers
 {
     private List<Offer> offers = new List<Offer>();
 
-    public List<Offer> UpdateAddOffer(string sku, int quantity, double discountPrice)
+    public List<Offer> UpdateAdd(string sku, int quantity, double discountPrice)
     {
         this.offers.RemoveAll(x => x.Sku == sku);
         this.offers.Add(new Offer(sku, quantity, discountPrice));
         return offers;
     }
 
-    public double ApplyOffersToProducts(string sku, int basketQuantity)
+    public double ApplyOffer(string sku, int basketQuantity)
     {
         var offer = this.offers.Where(x => x.Sku == sku).FirstOrDefault();
         if (offer == null)

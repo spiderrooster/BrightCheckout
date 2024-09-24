@@ -32,12 +32,11 @@ public class CatalogueTest
     }
 
     [TestMethod]
-    [ExpectedException(typeof(UnknownProductException))]
     public void RemoveFromCatalogue()
     {
         catalogue.AddUpdate("A", 2.00);
         Assert.AreEqual(2.00, catalogue.GetPrice("A"));
         catalogue.RemoveProduct("A");
-        catalogue.GetPrice("A");
+        Assert.ThrowsException<UnknownProductException>(()=>catalogue.GetPrice("A"));
     }
 }
