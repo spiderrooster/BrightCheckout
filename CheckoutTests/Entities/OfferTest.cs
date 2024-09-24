@@ -12,8 +12,11 @@ public class OfferTest
     }
 
     [TestMethod]
-    public void OfferTesttMethod1()
+    public void TestOffer()
     {
-        Console.WriteLine("Hello, World!, OfferTesttMethod1");
+        Assert.AreEqual(offer.Sku, "A");
+        Assert.AreEqual(offer.Quantity, 10);
+        Assert.AreEqual(offer.DiscountPrice, 10.00);
+        Console.WriteLine("Hello, World!, OfferTestOne");
     }
 }

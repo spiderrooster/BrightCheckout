@@ -11,7 +11,7 @@ public class Catalogue
         return catalogue;
     }
 
-    public void AddUpdateProductPrice(Product prod)
+    public void AddUpdate(Product prod)
     {
         if (!catalogue.Contains(prod))
         {
@@ -20,7 +20,7 @@ public class Catalogue
         this.catalogue.Add(prod);
     }
 
-    public void AddUpdateProductPrice(string sku, decimal price)
+    public void AddUpdate(string sku, double price)
     {
         this.catalogue.RemoveAll(x => x.Sku == sku);
         this.catalogue.Add(new Product(sku, price));
@@ -31,7 +31,7 @@ public class Catalogue
         this.catalogue.RemoveAll(x => x.Sku == sku);
     }
 
-    public decimal GetPriceForProduct(string sku)
+    public double GetPrice(string sku)
     {
         var product = this.catalogue.Where(x => x.Sku == sku).FirstOrDefault();
         if (product == null)
