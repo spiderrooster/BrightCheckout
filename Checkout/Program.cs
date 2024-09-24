@@ -24,7 +24,7 @@ Basket basket = new Basket();
 CalculateBasket cb = new CalculateBasket(catalogue, offers);
 
 List<string> items = new List<string>
-            { "A", "A", "A" };
+            { "A", "A", "A", "A" };
 
 cb.ScanList(items);
 Console.WriteLine("Total:" + cb.Total());

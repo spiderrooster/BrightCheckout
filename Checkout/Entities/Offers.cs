@@ -1,3 +1,4 @@
+using Checkout.Exeptions;
 namespace Checkout.Entities;
 
 public class Offers
@@ -18,10 +19,17 @@ public class Offers
 
     public List<Offer> GetOffers()
     {
-        return offers;
+        if(offers.Count()>0)
+        {
+        return this.offers;
+        }
+        else
+        {
+            throw new NoOffersFoundException();
+        }
     }
 
-    public double ApplyOffer(string sku, int basketQuantity)
+    public double ApplyOffer(string sku, ref int basketQuantity)
     {
         var offer = this.offers.Where(x => x.Sku == sku).FirstOrDefault();
         if (offer == null)
@@ -30,7 +38,10 @@ public class Offers
         }
         else
         {
-            return (basketQuantity % offer.Quantity) * offer.DiscountPrice;
+            var result = ( basketQuantity / offer.Quantity) *  offer.DiscountPrice;
+            basketQuantity = basketQuantity % offer.Quantity;
+
+            return  result;
         }
     }
 }

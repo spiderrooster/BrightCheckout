@@ -46,8 +46,9 @@ public class CalculateBasket
         {
             var sku = group.Key;
             var baskQuantity = group.Value;
-            total += offers.ApplyOffer(sku, baskQuantity);
+            total += offers.ApplyOffer(sku, ref baskQuantity);
             total += baskQuantity * catalogue.GetPrice(group.Key);
+
         }
         return total;
     }
